@@ -3,22 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Card Search</title>
+    <title>MTG Card Search</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
-        <h1>Search for a Magic: The Gathering Card</h1>
+        <h1>Magic: The Gathering Card Search</h1>
+        
         <form id="scryfall-search-form">
-            <label for="card-name">Enter Card Name:</label>
-            <input type="text" id="card-name" name="card-name" placeholder="Card Name" required>
+            <input type="text" id="card-name" name="card-name" placeholder="Enter card name..." required>
             <button type="submit">Search</button>
         </form>
 
-        <div id="card-result">
-            <!-- The card information will appear here -->
-        </div>
+        <div id="card-result"></div>
+        <button id="save-card" style="display: none;">Save Card</button>
+
+        <h2>Saved Cards</h2>
+        <div id="saved-cards"></div>
+
+        <h2>Upload CSV</h2>
+        <form id="csv-upload-form">
+            <input type="file" id="csv-file" accept=".csv">
+            <button type="button" onclick="uploadCSV()">Upload CSV</button>
+        </form>
     </div>
 
     <script src="script.js"></script>
