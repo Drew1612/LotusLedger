@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Decks</title>
+    <style>
+        /* Add some basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        #deck-list-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        #deck-list-items li {
+            background-color: #fff;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #deck-name {
+            padding: 8px;
+            font-size: 16px;
+            width: 80%;
+        }
+        .add-deck-container {
+            margin-bottom: 20px;
+        }
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header nav {
+            margin-top: 10px;
+        }
+
+        header button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        header button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Lotus Ledger</h1>
+        <nav>
+            <button onclick="window.location.href='index.html'">Current Card Storage</button>
+            <button onclick="window.location.href='add-cards.html'">Add Cards</button>
+            <button onclick="window.location.href='manage-decks.html'">Manage Decks</button>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Manage Decks</h1>
+        
+        <!-- Add Deck Section -->
+        <div class="add-deck-container">
+            <input type="text" id="deck-name" placeholder="Enter deck name">
+            <button onclick="addDeck()">Add Deck</button>
+        </div>
+
+        <!-- Display Decks Section -->
+        <h2>Your Decks</h2>
+        <ul id="deck-list-items">
+            <!-- Decks will be displayed here -->
+        </ul>
+    </div>
+
+    <script>
+        // Initialize decks array
+        let decks = JSON.parse(localStorage.getItem("decks")) || [];
+
+        // Function to add a deck
+        function addDeck() {
+            const deckName = document.getElementById("deck-name").value.trim();
+            if (deckName) {
+                decks.push(deckName);
+                localStorage.setItem("decks", JSON.stringify(decks));
+                document.getElementById("deck-name").value = ''; // Clear input field
+                displayDecks(); // Re-display decks
+            } else {
+                alert('Please enter a valid deck name.');
+            }
+        }
+
+        // Function to display all decks
+        function displayDecks() {
+            const deckList = document.getElementById("deck-list-items");
+            deckList.innerHTML = ''; // Clear current list
+
+            decks.forEach((deck, index) => {
+                const li = document.createElement("li");
+                li.textContent = deck;
+
+                // Create a delete button
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    deleteDeck(index);
+                };
+
+                li.appendChild(deleteButton);
+                deckList.appendChild(li);
+            });
+        }
+
+        // Function to delete a deck
+        function deleteDeck(index) {
+            decks.splice(index, 1);
+            localStorage.setItem("decks", JSON.stringify(decks));
+            displayDecks(); // Re-display decks after deletion
+        }
+
+        // Display decks on page load
+        if (document.getElementById("deck-list-items")) {
+            displayDecks();
+        }
+    </script>
+</body>
+</html>

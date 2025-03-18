@@ -1,63 +1,207 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: #f4f4f4;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #2a2a2a;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+/* Header Styling */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
 }
 
-input {
-    width: 80%;
-    padding: 10px;
+header h1 {
+    margin: 0;
+}
+
+header nav {
     margin-top: 10px;
-    border-radius: 5px;
-    border: none;
 }
 
-button {
+header button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #0056b3;
+}
+
+/* Container for the main content */
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px #888888;
+}
+
+/* Heading Styles */
+h2 {
+    color: #333;
+}
+
+/* Form and Input Styles */
+form {
+    margin-bottom: 20px;
+    text-align: left;
+    display: inline-block;
+    max-width: 100%;
+}
+
+form label {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+form input {
     padding: 10px;
-    margin: 10px;
-    background-color: #4CAF50;
+    margin: 5px;
+    font-size: 16px;
+    width: 200px;
+}
+
+form button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    background-color: #007bff;
     color: white;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* File upload button */
+input[type="file"] {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+/* Error Cards List Styling */
+#error-cards {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+#error-cards div {
+    background-color: #ffcccb;
+    padding: 10px;
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+#error-cards button {
+    background-color: #ff0000;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#error-cards button:hover {
+    background-color: #cc0000;
+}
+
+/* Cards Grid for Add Cards and Current Cards Pages */
+#temp-cards, #saved-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 cards per row */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Card Styling */
+.card {
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 0px 5px 0px #888888;
+}
+
+.card img {
+    width: 100%; /* Image will fill the card width */
+    height: auto;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+/* Confirm Button */
+button {
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
     border-radius: 5px;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #218838;
 }
 
-img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 10px;
+button:focus {
+    outline: none;
 }
 
-#saved-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+/* Style for spacing between sections */
+hr {
+    margin: 30px 0;
 }
 
-.saved-card {
-    background: #333;
-    padding: 10px;
-    border-radius: 5px;
+/* Responsive layout adjustments */
+@media (max-width: 1024px) {
+    /* Adjust grid to have 3 cards per row for tablets and medium screens */
+    #temp-cards, #saved-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
-.saved-card button {
-    background: red;
-    margin-top: 5px;
+@media (max-width: 768px) {
+    /* Adjust grid to have 2 cards per row for small screens */
+    #temp-cards, #saved-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust grid to have 1 card per row for very small screens */
+    #temp-cards, #saved-cards {
+        grid-template-columns: 1fr;
+    }
+
+    form input {
+        width: 100%;
+    }
+
+    header button {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
 }

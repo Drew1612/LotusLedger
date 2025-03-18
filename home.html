@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotus Ledger - Home</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Home Page Content -->
+    <div class="container">
+        <h2>Welcome to Lotus Ledger</h2>
+        <p>Please log in to continue:</p>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Enter your username" required>
+            <button type="submit">Log In</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const username = document.getElementById("username").value.trim();
+            if (username) {
+                // Store the logged-in state
+                localStorage.setItem("loggedIn", true);
+                localStorage.setItem("username", username);
+
+                // Redirect to index.html after login
+                window.location.href = "index.html";
+            } else {
+                alert("Please enter a username.");
+            }
+        });
+
+        // Check if user is already logged in
+        window.onload = function() {
+            if (localStorage.getItem("loggedIn")) {
+                window.location.href = "index.html"; // Redirect to index.html if already logged in
+            }
+        };
+    </script>
+
+</body>
+</html>

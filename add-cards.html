@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Cards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Lotus Ledger</h1>
+        <nav>
+            <button onclick="window.location.href='index.html'">Current Card Storage</button>
+            <button onclick="window.location.href='add-cards.html'">Add Cards</button>
+            <button onclick="window.location.href='manage-decks.html'">Manage Decks</button>
+        </nav>
+    </header>
+
+    <!-- Add Cards Page -->
+    <div class="container">
+        <h2>Add Cards</h2>
+
+        <!-- Error Cards Section -->
+        <div id="error-cards" style="margin-bottom: 20px;">
+            <!-- Error cards will be listed here -->
+        </div>
+
+        <!-- Card Search -->
+        <form id="scryfall-search-form">
+            <label for="card-name">Enter Card Name:</label>
+            <input type="text" id="card-name" name="card-name" placeholder="Card Name" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- CSV Upload -->
+        <div>
+            <input type="file" id="csv-upload" accept=".csv">
+            <button onclick="uploadCSV()">Upload CSV</button>
+        </div>
+
+        <hr>
+
+        <!-- Temporary Cards Section -->
+        <div id="temp-cards" class="card-grid" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+            <!-- Temporary cards will be displayed here -->
+        </div>
+
+        <hr>
+
+        <!-- Confirm Button -->
+        <div>
+            <button onclick="confirmAddCards()">Confirm Add Cards</button>
+        </div>
+    </div>
+
+    <!-- Include Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -3,32 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTG Card Search</title>
+    <title>Current Card Storage - Lotus Ledger</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- Header Section -->
+    <div class="header">
+        <h1>Lotus Ledger</h1>
+        <div class="header-buttons">
+            <button onclick="location.href='index.html'">Current Card Storage</button>
+            <button onclick="location.href='add-cards.html'">Add Cards</button>
+            <button onclick="location.href='manage-decks.html'">Manage Decks</button>
+        </div>
+    </div>
+
+    <!-- Current Card Storage Content -->
     <div class="container">
-        <h1>Magic: The Gathering Card Search</h1>
-        
-        <form id="scryfall-search-form">
-            <input type="text" id="card-name" name="card-name" placeholder="Enter card name..." required>
-            <button type="submit">Search</button>
-        </form>
+        <h2>Current Card Storage</h2>
 
-        <div id="card-result"></div>
-        <button id="save-card" style="display: none;">Save Card</button>
+        <!-- Filter Section -->
+        <div class="controls">
+            <label for="filter">Filter by Type:</label>
+            <select id="filter" onchange="filterCards()">
+                <option value="all">All</option>
+                <option value="Creature">Creature</option>
+                <option value="Planeswalker">Planeswalker</option>
+                <option value="Land">Land</option>
+                <option value="Artifact">Artifact</option>
+                <option value="Enchantment">Enchantment</option>
+                <option value="Sorcery">Sorcery</option>
+                <option value="Instant">Instant</option>
+            </select>
+            <span id="card-count">Total Cards: 0</span>
+        </div>
 
-        <h2>Saved Cards</h2>
-        <div id="saved-cards"></div>
-
-        <h2>Upload CSV</h2>
-        <form id="csv-upload-form">
-            <input type="file" id="csv-file" accept=".csv">
-            <button type="button" onclick="uploadCSV()">Upload CSV</button>
-        </form>
+        <!-- Saved Cards Section -->
+        <div id="saved-cards" class="card-grid"></div>
     </div>
 
     <script src="script.js"></script>
+
+    <script>
+        // Fetch saved cards from local storage
+        let savedCards = JSON.parse(localStorage.getItem("savedCards")) || {};
+
+        // Display saved cards
+        function displaySavedCards() {
+            const savedCardsDiv = document.getElementById("saved-cards");
+            savedCardsDiv.innerHTML = "";
+
+            Object.values(savedCards).forEach(card => {
+                const cardDiv = document.createElement("div");
+                cardDiv.classList.add("card");
+                cardDiv.innerHTML = `
+                    <h3>${card.name} (x${card.quantity})</h3>
+                    <img src="${card.image}" alt="${card.name}">
+                `;
+                savedCardsDiv.appendChild(cardDiv);
+            });
+
+            // Update total card count
+            document.getElementById("card-count").innerText = `Total Cards: ${Object.keys(savedCards).length}`;
+        }
+
+        displaySavedCards(); // Initialize the page with saved cards
+    </script>
+
 </body>
 </html>
